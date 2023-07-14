@@ -103,3 +103,9 @@ meter {
 
 /* ここから */
 
+button {
+    display: inline-block;
+    font-size: 32px;
+    width: 200px;
+    height: 48px;
+  }
