@@ -6,31 +6,51 @@ class Main extends React.Component {
         super(props);
         this.state = {
             playerHand: '',
+            cpuHand: '',
+            result: '',
         };
     }
     handleHandChange() {
-        var num = Math.floor( Math.random() * 3);
         const hands = ['グー', 'チョキ', 'パー'];
-        if (num === 0) {
+        this.setState({
+            playerHand: hands[Math.floor( Math.random() * 3)]
+        });
+        this.setState({
+            cpuHand: hands[Math.floor( Math.random() * 3)]
+        });
+        if (this.state.playerHand === this.state.cpuHand) {
             this.setState({
-                playerHand: hands[num],
+                result: 'あいこ！'
             });
-        } else if (num === 1) {
-            this.setState({
-                playerHand: hands[num],
-            });
-        } else if (num === 2) {
-            this.setState({
-                playerHand: hands[num],
-            });
+        } else {
+            if (this.state.playerHand === 'グー') {
+                if (this.state.cpuHand === 'パー') {
+                    this.setState({
+                        result: '負け！'
+                    });
+                } else if (this.state.cpuHand === 'チョキ') {
+                    this.setState({
+                        result: '勝ち！'
+                    });
+                }
+            } else if (this.state.playerHand === 'チョキ') {
+                if (this.state.cpuHand === 'グー') {
+                    this.setState({
+                        result: '負け！'
+                    });
+                }
+
+            }
         }
     }
 
     render() {
         return(
             <div>
-                <h1>{this.state.playerHand}</h1>
-                <button onClick={() => {this.handleHandChange()}}>+</button>
+                <p>player: {this.state.playerHand}</p>
+                <p>cpu: {this.state.cpuHand}</p>
+                <p>{this.state.result}</p>
+                <button onClick={() => {this.handleHandChange()}}>押してください</button>
             </div>
         );
     }
