@@ -26,20 +26,35 @@ class Main extends React.Component {
             if (this.state.playerHand === 'グー') {
                 if (this.state.cpuHand === 'パー') {
                     this.setState({
-                        result: '負け！'
+                        result: '負け！',
                     });
                 } else if (this.state.cpuHand === 'チョキ') {
                     this.setState({
-                        result: '勝ち！'
+                        result: '勝ち！',
                     });
                 }
             } else if (this.state.playerHand === 'チョキ') {
                 if (this.state.cpuHand === 'グー') {
                     this.setState({
-                        result: '負け！'
+                        result: '負け！',
                     });
                 }
-
+                if (this.state.cpuHand === 'パー') {
+                    this.setState({
+                        result: '勝ち！',
+                    });
+                }
+            } else if (this.state.playerHand === 'パー') {
+                if (this.state.cpuHand === 'グー') {
+                    this.setState({
+                        result: '勝ち！',
+                    });
+                }
+                if (this.state.cpuHand === 'チョキ') {
+                    this.setState({
+                        result: '負け！',
+                    });
+                }
             }
         }
     }
