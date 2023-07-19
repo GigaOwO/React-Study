@@ -10,16 +10,17 @@ class Main extends React.Component {
         };
     }
 
-    handleHandChange() {
+    handleHandChange = (num) => {
         const hands = ['グー', 'チョキ', 'パー'];
-        const playerHand = hands[Math.floor(Math.random() * 3)];
-        const cpuHand = hands[Math.floor(Math.random() * 3)];
+        const playerHand = hands[num];
+        const cpuHand = hands[Math.floor(Math.random() * hands.length)];
 
-        this.setState({ cpuHand, playerHand }, () => {
-            // Callback after the state is updated
+        this.setState({ playerHand, cpuHand }, () => {
+            // ステートが更新された後のコールバック
             console.log(this.state.playerHand);
             console.log(this.state.cpuHand);
 
+            // プレイヤーとCPUの手に基づいて結果を決定するコード
             if (this.state.playerHand === this.state.cpuHand) {
                 this.setState({
                     result: 'あいこ！'
@@ -38,15 +39,19 @@ class Main extends React.Component {
                 });
             }
         });
-    }
+    };
 
     render() {
+        const { playerHand, cpuHand, result } = this.state;
+
         return (
             <div>
-                <p>player: {this.state.playerHand}</p>
-                <p>cpu: {this.state.cpuHand}</p>
-                <p>{this.state.result}</p>
-                <button onClick={() => { this.handleHandChange() }}>押してください</button>
+                <p>player: {playerHand}</p>
+                <p>cpu: {cpuHand}</p>
+                <p>{result}</p>
+                <button onClick={() => this.handleHandChange(0)}>グー</button>
+                <button onClick={() => this.handleHandChange(1)}>チョキ</button>
+                <button onClick={() => this.handleHandChange(2)}>パー</button>
             </div>
         );
     }
